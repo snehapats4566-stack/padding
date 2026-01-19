@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Padding, Margin and Flexbox Demo</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;line-height:1.4;color:#111}
+    body{margin:24px;background:#f7f7fb;color:#0b0b0b}
+    h1,h2{margin:0 0 12px}
+    section{background:#fff;border-radius:8px;padding:16px;margin-bottom:18px;box-shadow:0 6px 18px rgba(17,24,39,0.06)}
+    .row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+    .box{border:2px solid #1112;min-width:160px;background:#e9f5ff;padding:8px}
+    .demo{background:#eaf6df;border:2px solid #111;margin:8px 0;padding:8px}
+    .small{font-size:13px;color:#333}
+    .code{background:#0f1724;color:#dbeafe;padding:8px;border-radius:6px;font-family:Menlo,monospace;font-size:13px}
+    .flex-container{display:flex;background:#fff1cc;padding:8px;border:2px dashed #b27700}
+    .flex-item{background:#cfe8ff;border:1px solid #b6d4ff;padding:8px}
+    .controls{margin-top:8px}
+    pre{background:#f3f4f6;padding:8px;border-radius:6px;font-family:Menlo,monospace;overflow:auto}
+  </style>
+</head>
+<body>
+  <h1>Padding, Margin and Flexbox — Interactive Demo</h1>
+  <p class="small">Open this file in your browser and use the inspector to measure distances. Each section has the code and brief notes.</p>
+
+  <section id="task1">
+    <h2>Task 1: Content vs Padding</h2>
+    <div class="row">
+      <div class="demo" style="padding:20px;border:2px solid #000;background:#e0f7fa;">Padding: 20px</div>
+      <div class="demo" style="padding:40px;border:2px solid #000;background:#e0f7fa;">Padding: 40px</div>
+      <div class="demo" style="padding:80px;border:2px solid #000;background:#e0f7fa;">Padding: 80px</div>
+    </div>
+    <pre class="code">/* Measure: distance from text to inner border is the padding. Padding increases element's painted size and pushes neighbors. */</pre>
+  </section>
+
+  <section id="task2">
+    <h2>Task 2: Content vs Margin</h2>
+    <div class="demo" style="margin:40px;border:2px solid #000;background:#ffecb3;">Margin: 40px (space outside border)</div>
+    <pre class="code">/* Observation: margin space lies outside the border and background. Margin does not paint; it creates external gap. */</pre>
+  </section>
+
+  <section id="task3">
+    <h2>Task 3: Padding and Background Relationship</h2>
+    <div class="demo" style="padding:20px;border:2px solid #000;background:#c8e6c9;margin-bottom:12px;">Padding colored (background covers content+padding)</div>
+    <div class="demo" style="margin:20px;border:2px solid #000;background:#c8e6c9;">Margin not colored (margin is outside border)</div>
+    <pre class="code">/* Background paints content and padding, up to the border. Margin is transparent. */</pre>
+  </section>
+
+  <section id="task4">
+    <h2>Task 4: Side-Specific Spacing</h2>
+    <div class="demo" style="padding:10px 50px 30px 70px;border:2px solid #000;background:#eef2ff;margin-bottom:8px;">padding: 10px 50px 30px 70px</div>
+    <div class="demo" style="margin:60px 20px;border:2px solid #000;background:#fbe9e7;">margin: 60px 20px</div>
+    <pre class="code">/* padding: top 10px; right 50px; bottom 30px; left 70px.  margin: top/bottom 60px; left/right 20px. */</pre>
+  </section>
+
+  <section id="task5">
+    <h2>Task 5: Invalid and Extreme Values</h2>
+    <div class="row">
+      <div class="demo" style="padding:0;border:2px solid #000;background:#fff3e0;">Try padding:-20px in the inspector (invalid)</div>
+      <div class="demo" style="margin:0;border:2px solid #000;background:#f3e5f5;">Try margin:-20px (allowed; may overlap)</div>
+    </div>
+    <pre class="code">/* Negative padding is ignored/treated as 0. Negative margin is allowed and pulls boxes together (use carefully). */</pre>
+  </section>
+
+  <section id="task6">
+    <h2>Task 6: Margin Collapse Investigation</h2>
+    <div style="background:#ffd7d7;margin-bottom:50px;padding:8px;border:1px solid #c00;">Box 1 (margin-bottom:50px)</div>
+    <div style="background:#d7ffd7;margin-top:30px;padding:8px;border:1px solid #080;">Box 2 (margin-top:30px)</div>
+    <pre class="code">/* Final vertical gap is 50px (margins collapse). Replace with padding to get 80px. */</pre>
+  </section>
+
+  <section id="task7">
+    <h2>Task 7: Inline vs Block Elements</h2>
+    <div class="demo" style="display:block;background:#e1f5fe;margin:20px;padding:10px;">DIV block — margins top/bottom affect flow</div>
+    <span class="demo" style="display:inline;background:#e1f5fe;margin:20px;padding:10px;">SPAN inline — horizontal margins apply, vertical margins not reliably</span>
+    <div class="demo" style="display:inline-block;background:#e1f5fe;margin:20px;padding:10px;">SPAN as inline-block — margins behave like block</div>
+    <pre class="code">/* Inline elements use line boxes; vertical margins are constrained. Use inline-block when you need block-like spacing. */</pre>
+  </section>
+
+  <section id="task8">
+    <h2>Task 8: Why Flex Exists</h2>
+    <div class="flex-container" style="margin-bottom:8px;">
+      <div class="flex-item">1</div>
+      <div class="flex-item">2</div>
+      <div class="flex-item">3</div>
+    </div>
+    <pre class="code">/* Apply display:flex to the container to: 1) lay items on a main axis, 2) distribute/shrink/grow space, 3) align on cross-axis. */</pre>
+  </section>
+
+  <section id="task9">
+    <h2>Task 9: Padding Inside Flex Items</h2>
+    <div class="flex-container" style="margin-bottom:8px;">
+      <div class="flex-item" style="padding:8px;">Item A (padding 8px)</div>
+      <div class="flex-item" style="padding:24px;">Item B (padding 24px)</div>
+      <div class="flex-item" style="padding:40px;">Item C (padding 40px)</div>
+    </div>
+    <pre class="code">/* Padding changes item box size; alignment centers boxes. Padding doesn't break alignment logic. */</pre>
+  </section>
+
+  <section id="task10">
+    <h2>Task 10: Margin Inside Flex Items / gap</h2>
+    <div class="flex-container" style="margin-bottom:8px;">
+      <div class="flex-item" style="margin:20px;">Margin 20</div>
+      <div class="flex-item" style="margin:20px;">Margin 20</div>
+      <div class="flex-item" style="margin:20px;">Margin 20</div>
+    </div>
+
+    <div class="flex-container" style="gap:20px;">
+      <div class="flex-item">gap: 20</div>
+      <div class="flex-item">gap: 20</div>
+      <div class="flex-item">gap: 20</div>
+    </div>
+    <pre class="code">/* gap provides consistent inter-item spacing from the container; margins are applied per-item and can create edge spacing issues. */</pre>
+  </section>
+
+  <section id="task11">
+    <h2>Task 11: Main Axis vs Cross Axis</h2>
+    <div class="flex-container" style="flex-direction:row;margin-bottom:8px;">
+      <div class="flex-item">row - main axis horizontal</div>
+      <div class="flex-item">row - cross axis vertical</div>
+    </div>
+    <div class="flex-container" style="flex-direction:column;">
+      <div class="flex-item">column - main axis vertical</div>
+      <div class="flex-item">column - cross axis horizontal</div>
+    </div>
+    <pre class="code">/* Main axis is determined by flex-direction. Use margin on the main axis (e.g., margin-left:auto on a row) to take free space. */</pre>
+  </section>
+
+  <section id="task12">
+    <h2>Task 12: justify-content vs margin</h2>
+    <div class="flex-container" style="justify-content:space-between;margin-bottom:8px;">
+      <div class="flex-item">Left</div>
+      <div class="flex-item">Center</div>
+      <div class="flex-item">Right</div>
+    </div>
+    <pre class="code">/* Container-level controls like justify-content keep spacing consistent across sizes. */</pre>
+  </section>
+
+  <section id="task13">
+    <h2>Task 13: align-items and Padding Interaction</h2>
+    <div class="flex-container" style="height:120px;align-items:center;margin-bottom:8px;">
+      <div class="flex-item" style="padding:8px;">p:8</div>
+      <div class="flex-item" style="padding:28px;">p:28</div>
+      <div class="flex-item" style="padding:56px;">p:56</div>
+    </div>
+    <pre class="code">/* align-items centers each item's outer box. Increasing padding changes the item's size but keeps it centered. */</pre>
+  </section>
+
+  <section id="task14">
+    <h2>Task 14: Auto Margin in Flex</h2>
+    <div class="flex-container" style="margin-bottom:8px;">
+      <div class="flex-item">Left</div>
+      <div class="flex-item" style="margin-left:auto;">Right (margin-left:auto)</div>
+    </div>
+    <pre class="code">/* Auto margins in flex consume available free space and are useful for toolbars/navbars. */</pre>
+  </section>
+
+  <section id="task15">
+    <h2>Task 15: Button Design</h2>
+    <button style="padding:12px 20px;margin:8px;border-radius:6px;">Button (padding increases hit area)</button>
+    <pre class="code">/* Padding increases the clickable area (accessibility). Margin controls spacing between the button and other elements. */</pre>
+  </section>
+
+  <section id="task16">
+    <h2>Task 16: Card Component Construction</h2>
+    <div style="display:flex;gap:16px;">
+      <div style="width:300px;background:#fff;border-radius:8px;padding:16px;box-shadow:0 4px 12px rgba(2,6,23,0.06);">
+        <div style="height:140px;background:#cfe8ff;margin-bottom:12px;display:flex;align-items:center;justify-content:center;">Image</div>
+        <h3 style="margin:0 0 8px">Card title</h3>
+        <p style="margin:0 0 12px">Card text goes here. Use padding for internal spacing.</p>
+        <button style="padding:10px 14px">Action</button>
+      </div>
+      <div style="width:300px;background:#fff;border-radius:8px;padding:16px;box-shadow:0 4px 12px rgba(2,6,23,0.06);">
+        <div style="height:140px;background:#cfe8ff;margin-bottom:12px;display:flex;align-items:center;justify-content:center;">Image</div>
+        <h3 style="margin:0 0 8px">Card title</h3>
+        <p style="margin:0 0 12px">Card text goes here. Use gap or container margin for spacing between cards.</p>
+        <button style="padding:10px 14px">Action</button>
+      </div>
+    </div>
+    <pre class="code">/* Cards use padding internally; use gap or margins externally to separate cards. */</pre>
+  </section>
+
+  <section id="task17">
+    <h2>Task 17: Box Size Illusion</h2>
+    <div style="display:flex;gap:24px;align-items:flex-start;margin-bottom:12px;">
+      <div style="width:200px;height:200px;padding:40px;border:2px solid #333;background:#e6f7ff;">Box A (large padding)</div>
+      <div style="width:200px;height:200px;margin:40px;border:2px solid #333;background:#fff0f0;">Box B (large margin)</div>
+    </div>
+    <pre class="code">/* Box A looks larger because its painted area grows; Box B pushes other elements further away (occupies more layout space). */</pre>
+  </section>
+
+  <section id="task18">
+    <h2>Task 18: Broken Layout Diagnosis</h2>
+    <div style="width:420px;border:1px solid #ddd;padding:8px;">
+      <div style="display:flex;">
+        <div style="width:150px;padding:40px;border:1px solid #000;background:#fff;box-sizing:content-box;">150 + padding (content-box) may cause overflow</div>
+        <div style="width:150px;padding:40px;border:1px solid #000;background:#fff;box-sizing:border-box;margin-left:8px;">150 including padding (border-box)</div>
+      </div>
+    </div>
+    <pre class="code">/* Use box-sizing:border-box to include padding/border in width and avoid overflow when adding padding. */</pre>
+  </section>
+
+  <section id="task19">
+    <h2>Task 19: When Margin Fails</h2>
+    <div style="height:140px;border:1px dashed #ccc;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+      <div style="background:#f0f7ff;padding:8px;">Centered with flex</div>
+    </div>
+    <pre class="code">/* Use flex (align-items/justify-content) to center reliably. Margins are static and brittle for centering. */</pre>
+  </section>
+
+  <section id="task20">
+    <h2>Task 20: Rule Formation</h2>
+    <ul>
+      <li><strong>Padding</strong>: internal spacing; use for hit-target and breathing room.</li>
+      <li><strong>Margin</strong>: external spacing; use for spacing between components (or gap).</li>
+      <li><strong>Flexbox</strong>: use when items need distribution, alignment, or responsive spacing; prefer gap over per-item margins.</li>
+      <li><strong>box-sizing:border-box</strong>: makes width/height include padding/border — safer for components.</li>
+    </ul>
+    <pre class="code">/* You're done — open this file in a browser and inspect elements to measure distances and try edits live. */</pre>
+  </section>
+
+  <footer style="font-size:12px;color:#445;margin-top:16px">
+    Demo created to illustrate padding, margin, and flexbox behavior. Want this exported as a single runnable fiddle or improved with interactive controls? Reply and I'll enhance it.
+  </footer>
+</body>
+</html>
